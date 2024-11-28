@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord du banquier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+        .dashboard-container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .clients-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .clients-table th, .clients-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        .clients-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .clients-table tr:hover {
+            background-color: #f1f1f1;
+        }
+        .action-btn {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .action-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <h1>Gestion des clients</h1>
+
+    <h2>Liste des clients :</h2>
+    <table class="clients-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom d'utilisateur</th>
+            <th>Solde</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client : ${clients}">
+            <td th:text="${client.id}"></td>
+            <td th:text="${client.username}"></td>
+            <td th:text="${client.balance}"></td>
+            <td>
+                <button class="action-btn" th:href="@{'/banquier/edit/' + ${client.id}}">Éditer</button>
+                <button class="action-btn" th:href="@{'/banquier/delete/' + ${client.id}}">Supprimer</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/banquier/add-client">
+        <button class="action-btn">Ajouter un client</button>
+    </a>
+</div>
+
+</body>
+</html>

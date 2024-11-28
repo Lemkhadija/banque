@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfert d'argent</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .message p {
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Transfert d'argent</h2>
+
+    <!-- Formulaire de transfert -->
+    <form action="/client/transfer" method="post">
+        <div class="form-group">
+            <label for="recipientId">ID du destinataire</label>
+            <input type="text" id="recipientId" name="recipientId" required>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Montant à transférer</label>
+            <input type="number" id="amount" name="amount" required>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Transférer</button>
+        </div>
+    </form>
+
+    <!-- Affichage des messages de succès ou d'erreur -->
+    <div class="message">
+        <div th:if="${success}">
+            <p class="success" th:text="${success}">Transfert effectué avec succès !</p>
+        </div>
+        <div th:if="${error}">
+            <p class="error" th:text="${error}">Erreur : <span th:text="${error}"></span></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
