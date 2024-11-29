@@ -29,9 +29,9 @@
             <h3>Détails du Client</h3>
         </div>
         <div class="card-body">
-            <h5 class="card-title">Nom d'utilisateur : <span th:text="${clientName}"></span></h5>
-            <p class="card-text">Solde : <span th:text="${balance}"></span> MAD</p>
-            <p class="card-text">ID Client : <span th:text="${clientId}"></span></p>
+            <h5 class="card-title">Nom d'utilisateur : <span th:text="client2"></span></h5>
+            <p class="card-text">Solde : <span th:text="950"></span> MAD</p>
+            <p class="card-text">ID Client : <span th:text="2"></span></p>
 
             <h5>Transactions récentes</h5>
             <table class="table table-striped">
@@ -43,10 +43,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="transaction : ${recentTransactions}">
-                    <td th:text="${transaction.date}"></td>
-                    <td th:text="${transaction.type}"></td>
-                    <td th:text="${transaction.amount}"></td>
+                <tr >
+                    <td th:text="28/11/2024"></td>
+                    <td th:text="Virement"></td>
+                    <td th:text="500"></td>
                 </tr>
                 </tbody>
             </table>

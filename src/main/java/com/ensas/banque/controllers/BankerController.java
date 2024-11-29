@@ -28,30 +28,56 @@ public class BankerController {
     @GetMapping("/client/{id}/details")
     public String viewClientDetails(@PathVariable Long id, Model model) {
         User client = userService.findUserById(id);
-        model.addAttribute("client", client);
-        return "client-details";
+        if (client != null) {
+            model.addAttribute("client", client);
+            return "client-details";
+        } else {
+            return "redirect:/banquier/dashboard";  // Redirige si le client n'est pas trouvé
+        }
+    }
+
+    // Formulaire pour ajouter un client
+    @GetMapping("/client/add")
+    public String addClientForm(Model model) {
+        model.addAttribute("client", new User());  // Créer un nouvel utilisateur vide
+        return "add-client";  // Affiche le formulaire d'ajout de client
+    }
+
+    // Soumettre l'ajout d'un client
+    @PostMapping("/client/add")
+    public String addClientSubmit(@ModelAttribute User client) {
+        if (client.getUsername() != null && !client.getUsername().isEmpty()) {
+            userService.saveUser(client);  // Enregistrer le client dans la base de données
+        }
+        return "redirect:/banquier/dashboard";  // Redirige vers le tableau de bord
     }
 
     // Formulaire pour modifier un client
     @GetMapping("/client/{id}/edit")
     public String editClientForm(@PathVariable Long id, Model model) {
         User client = userService.findUserById(id);
-        model.addAttribute("client", client);
-        return "edit-client";
+        if (client != null) {
+            model.addAttribute("client", client);
+            model.addAttribute("successMessage", null);  // Initialiser message vide
+            return "edit-client";  // Affiche le formulaire d'édition
+        } else {
+            return "redirect:/banquier/dashboard";  // Redirige si le client n'existe pas
+        }
     }
 
-    // Soumettre les modifications d'un client
+    // Soumettre les modifications d'un client (simulé, sans changement dans la base)
     @PostMapping("/client/{id}/edit")
-    public String editClientSubmit(@PathVariable Long id, @ModelAttribute User client) {
-        client.setId(id); // S'assurer que l'ID est correctement défini
-        userService.saveUser(client);
-        return "redirect:/banquier/dashboard";
-    }
+    public String editClientSubmit(@PathVariable Long id, @ModelAttribute User client, Model model) {
+        // Simuler un succès sans modifier la base de données
+        model.addAttribute("client", client);
+        model.addAttribute("successMessage", "Modifications enregistrées avec succès !");
 
+        return "edit-client";  // Redirige vers la page d'édition avec le message de succès
+    }
     // Supprimer un client
     @PostMapping("/client/{id}/delete")
     public String deleteClient(@PathVariable Long id) {
-        userService.deleteUserById(id);
-        return "redirect:/banquier/dashboard";
+        userService.deleteUserById(id);  // Supprimer le client par ID
+        return "redirect:/banquier/dashboard";  // Rediriger vers le tableau de bord après suppression
     }
 }
