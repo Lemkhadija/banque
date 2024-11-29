@@ -31,7 +31,7 @@ public class ClientController {
      */
     @GetMapping("/dashboard")
     public String clientDashboard(Model model) {
-        Long clientId = 4L; // Exemple d'ID de l'utilisateur connecté. À remplacer par la gestion de session.
+        Long clientId = 2L; // Exemple d'ID de l'utilisateur connecté. À remplacer par la gestion de session.
 
         try {
             // Récupérer les informations du client
@@ -50,8 +50,9 @@ public class ClientController {
         return "client-dashboard"; // Vue du tableau de bord
     }
 
+
     /**
-     * Affiche la page de transfert.
+     * Traitement du transfert d'argent.
      */
     @GetMapping("/transfer")
     public String transfer(Model model) {
