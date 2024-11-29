@@ -16,6 +16,7 @@ public class BankerController {
     @Autowired
     private UserService userService;
 
+    // Tableau de bord des clients
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         List<User> clients = userService.findAllClients();
@@ -23,28 +24,32 @@ public class BankerController {
         return "banquier-dashboard";
     }
 
-    @GetMapping("/client/details")
+    // Afficher les détails d'un client
+    @GetMapping("/client/{id}/details")
     public String viewClientDetails(@PathVariable Long id, Model model) {
         User client = userService.findUserById(id);
         model.addAttribute("client", client);
         return "client-details";
     }
 
-    @GetMapping("/client/edit")
+    // Formulaire pour modifier un client
+    @GetMapping("/client/{id}/edit")
     public String editClientForm(@PathVariable Long id, Model model) {
         User client = userService.findUserById(id);
         model.addAttribute("client", client);
         return "edit-client";
     }
 
-    @PostMapping("/client/edit")
+    // Soumettre les modifications d'un client
+    @PostMapping("/client/{id}/edit")
     public String editClientSubmit(@PathVariable Long id, @ModelAttribute User client) {
-        client.setId(id);
+        client.setId(id); // S'assurer que l'ID est correctement défini
         userService.saveUser(client);
         return "redirect:/banquier/dashboard";
     }
 
-    @PostMapping("/client/delete")
+    // Supprimer un client
+    @PostMapping("/client/{id}/delete")
     public String deleteClient(@PathVariable Long id) {
         userService.deleteUserById(id);
         return "redirect:/banquier/dashboard";
