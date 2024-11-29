@@ -86,13 +86,16 @@
             <td th:text="${client.role}"></td>
             <td th:text="${client.balance}"></td>
             <td>
-                <a href="/client/details">Détails</a> |
-                <a href="/client/edit">Modifier</a> |
-                <a href="/client/delete">Supprimer</a>
+                <a th:href="@{'/banquier/client/' + ${client.id} + '/details'}">Détails</a> |
+                <a th:href="@{'/banquier/client/' + ${client.id} + '/edit'}">Modifier</a> |
+                <form th:action="@{'/banquier/client/' + ${client.id} + '/delete'}" method="post" style="display:inline;">
+                    <button type="submit">Supprimer</button>
+                </form>
             </td>
         </tr>
         </tbody>
     </table>
+
 
     <div class="footer">
         <p><a href="/logout">Se déconnecter</a></p>
