@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du Client</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card-header {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            color: #fff;
+        }
+        .btn-primary {
+            background-color: #6a11cb;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #2575fc;
+        }
+    </style>
+</head>
+<body>
+<div class="container my-5">
+    <div class="card">
+        <div class="card-header text-center">
+            <h3>Détails du Client</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Nom d'utilisateur : <span th:text="${clientName}"></span></h5>
+            <p class="card-text">Solde : <span th:text="${balance}"></span> MAD</p>
+            <p class="card-text">ID Client : <span th:text="${clientId}"></span></p>
+
+            <h5>Transactions récentes</h5>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Montant</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="transaction : ${recentTransactions}">
+                    <td th:text="${transaction.date}"></td>
+                    <td th:text="${transaction.type}"></td>
+                    <td th:text="${transaction.amount}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-end mt-4">
+                <a href="/banquier/dashboard" class="btn btn-secondary me-2">Retour</a>
+                <a th:href="'/client/' + ${clientId} + '/edit'" class="btn btn-primary">Modifier</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
