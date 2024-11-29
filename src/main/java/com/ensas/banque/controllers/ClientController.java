@@ -31,7 +31,7 @@ public class ClientController {
      */
     @GetMapping("/dashboard")
     public String clientDashboard(Model model) {
-        Long clientId = 1L; // Exemple d'ID de l'utilisateur connecté. À remplacer par la gestion de session.
+        Long clientId = 4L; // Exemple d'ID de l'utilisateur connecté. À remplacer par la gestion de session.
 
         try {
             // Récupérer les informations du client
