@@ -5,6 +5,8 @@ import com.ensas.banque.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -21,11 +23,13 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User findUserByUsername(String username) {
-
-        return user;
+    public List<User> findAllClients() {
+        return userRepository.findByRole("CLIENT");  // Supposons qu'on filtre les utilisateurs par rôle
     }
     public User save(User user) { return userRepository.save(user); }
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
 }
 
 

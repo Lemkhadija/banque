@@ -28,7 +28,7 @@ public class AuthController {
             if ("CLIENT".equals(user.getRole())) {
                 return "redirect:/client/dashboard";
             } else {
-                return "redirect:/banquier-dashboard";
+                return "redirect:/banquier/dashboard";
             }
         }
         model.addAttribute("error", "Identifiants incorrects");
